@@ -1,0 +1,129 @@
+2018-02-17 00:24:00,411 my_logger INFO {'is_typable': 'true', 'response': u'Hello, I am SIA - SBI Intelligent Assistant. How may I assist you? I can help you with SBI Bank related queries. Please type your question in the box provided below.\r\n<br><br>\r\n<b>Disclaimer</b>: SIA chatbot is meant only for general information on SBI products and services. <b>Kindly do not share any critical data, password or PIN.</b>', 'recommended_queries': [u'Types of SBI NRI Accounts', u'Eligibility for NRI account', u'Interest rate for NRI accounts', u'Open an NRI account', u'Remittance for NRIs']}
+2018-02-17 00:42:19,567 my_logger INFO Entered do_pre_processing
+2018-02-17 00:42:19,567 my_logger INFO AFTER PREPROCESSING: eligibility for nri account
+2018-02-17 00:42:19,569 my_logger INFO AFTER PREPROCESSING: eligibility for nri account
+2018-02-17 00:42:19,569 my_logger INFO AFTER PREPROCESSING: eligibility for nri account 
+2018-02-17 00:42:19,571 my_logger INFO AFTER PREPROCESSING: eligibility for nri account
+2018-02-17 00:42:19,577 my_logger INFO Intent is : [<Intent: Eligibility>]
+2018-02-17 00:42:19,577 my_logger INFO Entities is : [<Choices: NRI Account>, <Choices: NRI>]
+2018-02-17 00:42:19,578 my_logger ERROR Error from: recur_entities() 'NoneType' object has no attribute 'entity_choices'
+2018-02-17 00:42:19,591 my_logger ERROR Error from: recur_entities() 'NoneType' object has no attribute 'entity_choices'
+2018-02-17 00:42:19,601 my_logger INFO Entity Name: interest_rate_products
+2018-02-17 00:42:19,606 my_logger INFO Entity Name: all_products
+2018-02-17 00:42:19,616 my_logger INFO Entered process_any_tree_with_stages_new
+2018-02-17 00:42:19,617 my_logger INFO Entered find_last_tree_from_persistent_entities
+2018-02-17 00:42:19,617 my_logger INFO Entered returnNextTree
+2018-02-17 00:42:19,629 my_logger INFO Entered returnNextTree
+2018-02-17 00:42:19,637 my_logger INFO Entered create_data_stages
+2018-02-17 00:46:17,172 my_logger INFO Entered do_pre_processing
+2018-02-17 00:46:17,172 my_logger INFO AFTER PREPROCESSING: eligibility
+2018-02-17 00:46:17,173 my_logger INFO AFTER PREPROCESSING: eligibility
+2018-02-17 00:46:17,174 my_logger INFO AFTER PREPROCESSING: eligibility 
+2018-02-17 00:46:17,175 my_logger INFO AFTER PREPROCESSING: eligibility
+2018-02-17 00:46:17,180 my_logger INFO Intent is : [<Intent: Eligibility>]
+2018-02-17 00:46:17,180 my_logger INFO Entities is : None
+2018-02-17 00:46:17,180 my_logger ERROR Error from: recur_entity_tree() 'NoneType' object is not iterable
+2018-02-17 00:46:17,193 my_logger INFO Entered process_any_tree_with_stages_new
+2018-02-17 00:46:17,194 my_logger INFO Entered find_last_tree_from_persistent_entities
+2018-02-17 00:46:17,194 my_logger INFO Entered returnNextTree
+2018-02-17 00:46:17,202 my_logger INFO Entered create_data_stages
+2018-02-17 00:46:17,212 my_logger INFO Entered process_any_tree_with_stages_new
+2018-02-17 00:46:17,214 my_logger INFO Entered saveEntity
+2018-02-17 00:46:17,215 my_logger INFO Inside SaveEntity
+2018-02-17 00:46:17,215 my_logger INFO Entity Type: all_products
+2018-02-17 00:46:17,215 my_logger INFO Choice Value NRI Account
+2018-02-17 00:46:17,221 my_logger INFO Entity Type: all_products
+2018-02-17 00:46:17,221 my_logger INFO Choice Value NRI
+2018-02-17 00:46:17,225 my_logger INFO Entered saveValueFromMessage
+2018-02-17 00:46:17,226 my_logger ERROR Error saveValueFromMessage ValueExtracter matching query does not exist.
+2018-02-17 00:46:17,227 my_logger INFO Entered find_last_tree_from_persistent_entities
+2018-02-17 00:46:17,227 my_logger INFO Entered returnNextTree
+2018-02-17 00:46:17,236 my_logger INFO Entered returnNextTree
+2018-02-17 00:46:17,244 my_logger INFO Entered process_any_tree_with_stages_new
+2018-02-17 00:46:17,245 my_logger INFO Entered find_last_tree_from_persistent_entities
+2018-02-17 00:46:17,245 my_logger INFO Entered returnNextTree
+2018-02-17 00:46:17,251 my_logger INFO Entered create_data_stages
+2018-02-17 00:46:17,261 my_logger INFO Entered process_any_tree_with_stages_new
+2018-02-17 00:46:17,263 my_logger INFO Entered saveEntity
+2018-02-17 00:46:17,264 my_logger INFO Inside SaveEntity
+2018-02-17 00:46:17,264 my_logger INFO Entity Type: nri_account_eligiblity
+2018-02-17 00:46:17,264 my_logger INFO Choice Value PIO and OCI
+2018-02-17 00:46:17,269 my_logger INFO Entered saveValueFromMessage
+2018-02-17 00:46:17,270 my_logger ERROR Error saveValueFromMessage ValueExtracter matching query does not exist.
+2018-02-17 00:46:17,270 my_logger INFO Entered find_last_tree_from_persistent_entities
+2018-02-17 00:46:17,270 my_logger INFO Entered returnNextTree
+2018-02-17 00:46:17,275 my_logger INFO Entered returnNextTree
+2018-02-17 00:46:17,275 my_logger ERROR Error returnNextTree 'NoneType' object has no attribute 'entity_group'
+2018-02-17 00:46:17,281 my_logger INFO Entered process_any_tree_with_stages_new
+2018-02-17 00:46:17,282 my_logger INFO Entered find_last_tree_from_persistent_entities
+2018-02-17 00:46:17,282 my_logger INFO Entered returnNextTree
+2018-02-17 00:46:17,282 my_logger ERROR Error returnNextTree 'NoneType' object has no attribute 'entity_group'
+2018-02-17 00:46:17,288 my_logger INFO Entered create_data_stages
+2018-02-17 00:53:29,729 my_logger ERROR class: GetPcIdAPIView, method: post PcId matching query does not exist.
+2018-02-17 01:02:14,150 my_logger INFO {'is_typable': 'true', 'response': u'Hello, I am SIA - SBI Intelligent Assistant. How may I assist you? I can help you with SBI Bank related queries. Please type your question in the box provided below.\r\n<br><br>\r\n<b>Disclaimer</b>: SIA chatbot is meant only for general information on SBI products and services. <b>Kindly do not share any critical data, password or PIN.</b>', 'recommended_queries': [u'Types of SBI NRI Accounts', u'Eligibility for NRI account', u'Interest rate for NRI accounts', u'Open an NRI account', u'Remittance for NRIs']}
+2018-02-17 01:16:19,979 my_logger ERROR class: GetPcIdAPIView, method: post PcId matching query does not exist.
+2018-02-17 01:52:01,042 my_logger INFO {'is_typable': 'true', 'response': u'Hello, I am SIA - SBI Intelligent Assistant. How may I assist you? I can help you with SBI Bank related queries. Please type your question in the box provided below.\r\n<br><br>\r\n<b>Disclaimer</b>: SIA chatbot is meant only for general information on SBI products and services. <b>Kindly do not share any critical data, password or PIN.</b>', 'recommended_queries': [u'Types of SBI NRI Accounts', u'Eligibility for NRI account', u'Interest rate for NRI accounts', u'Open an NRI account', u'Remittance for NRIs']}
+2018-02-17 02:01:45,815 my_logger INFO {'is_typable': 'true', 'response': u'Hello, I am SIA - SBI Intelligent Assistant. How may I assist you? I can help you with SBI Bank related queries. Please type your question in the box provided below.\r\n<br><br>\r\n<b>Disclaimer</b>: SIA chatbot is meant only for general information on SBI products and services. <b>Kindly do not share any critical data, password or PIN.</b>', 'recommended_queries': [u'Types of SBI NRI Accounts', u'Eligibility for NRI account', u'Interest rate for NRI accounts', u'Open an NRI account', u'Remittance for NRIs']}
+2018-02-17 02:17:18,517 my_logger ERROR class: GetPcIdAPIView, method: post PcId matching query does not exist.
+2018-02-17 02:18:53,064 my_logger INFO Entered do_pre_processing
+2018-02-17 02:18:53,064 my_logger INFO AFTER PREPROCESSING: my balance has been cut from my account but transaction was failed
+2018-02-17 02:18:53,066 my_logger INFO AFTER PREPROCESSING: my balance has been cut from my account but transaction was failed
+2018-02-17 02:18:53,066 my_logger INFO AFTER PREPROCESSING: my balance has been cut from my account but transaction was failed 
+2018-02-17 02:18:53,067 my_logger INFO AFTER PREPROCESSING: my balance has been cut from my account but transaction was failed
+2018-02-17 02:18:53,072 my_logger INFO Intent is : None
+2018-02-17 02:18:53,072 my_logger INFO Entities is : None
+2018-02-17 02:18:53,073 my_logger ERROR Error from: recur_entity_tree() 'NoneType' object is not iterable
+2018-02-17 02:18:53,086 my_logger INFO Entered do_pre_processing
+2018-02-17 02:18:53,086 my_logger INFO AFTER PREPROCESSING: how can i give an online complaint
+2018-02-17 02:18:53,087 my_logger INFO AFTER PREPROCESSING: how can i give an online complaint
+2018-02-17 02:18:53,087 my_logger INFO AFTER PREPROCESSING: how can i give an online complaint 
+2018-02-17 02:18:53,089 my_logger INFO AFTER PREPROCESSING: how can i give an online complaint
+2018-02-17 02:18:53,094 my_logger INFO Intent is : [<Intent: Unhappy with service>]
+2018-02-17 02:18:53,094 my_logger INFO Entities is : None
+2018-02-17 02:18:53,094 my_logger ERROR Error from: recur_entity_tree() 'NoneType' object is not iterable
+2018-02-17 02:18:53,108 my_logger ERROR function: increment_quer_cnt QueryCnt matching query does not exist.
+2018-02-17 02:18:53,115 my_logger INFO Entered process_any_tree_with_stages_new
+2018-02-17 02:18:53,116 my_logger INFO Entered find_last_tree_from_persistent_entities
+2018-02-17 02:18:53,116 my_logger INFO Entered returnNextTree
+2018-02-17 02:18:53,116 my_logger ERROR Error returnNextTree 'NoneType' object has no attribute 'entity_group'
+2018-02-17 02:18:53,121 my_logger INFO Entered create_data_stages
+2018-02-17 02:40:20,057 my_logger INFO {'is_typable': 'true', 'response': u'Hello, I am SIA - SBI Intelligent Assistant. How may I assist you? I can help you with SBI Bank related queries. Please type your question in the box provided below.\r\n<br><br>\r\n<b>Disclaimer</b>: SIA chatbot is meant only for general information on SBI products and services. <b>Kindly do not share any critical data, password or PIN.</b>', 'recommended_queries': [u'Types of SBI NRI Accounts', u'Eligibility for NRI account', u'Interest rate for NRI accounts', u'Open an NRI account', u'Remittance for NRIs']}
+2018-02-17 02:41:23,791 my_logger INFO Entered do_pre_processing
+2018-02-17 02:41:23,791 my_logger INFO AFTER PREPROCESSING: 3864442985
+2018-02-17 02:41:23,793 my_logger INFO AFTER PREPROCESSING: 3864442985
+2018-02-17 02:41:23,793 my_logger INFO AFTER PREPROCESSING: 3864442985 
+2018-02-17 02:41:23,794 my_logger INFO AFTER PREPROCESSING: 3864442985
+2018-02-17 02:41:23,799 my_logger INFO Intent is : None
+2018-02-17 02:41:23,799 my_logger INFO Entities is : None
+2018-02-17 02:41:23,799 my_logger ERROR Error from: recur_entity_tree() 'NoneType' object is not iterable
+2018-02-17 02:41:23,805 my_logger ERROR function: increment_quer_cnt QueryCnt matching query does not exist.
+2018-02-17 02:50:19,749 my_logger ERROR class: GetPcIdAPIView, method: post PcId matching query does not exist.
+2018-02-17 02:51:09,789 my_logger INFO {'is_typable': 'true', 'response': u'Hello, I am SIA - SBI Intelligent Assistant. How may I assist you? I can help you with SBI Bank related queries. Please type your question in the box provided below.\r\n<br><br>\r\n<b>Disclaimer</b>: SIA chatbot is meant only for general information on SBI products and services. <b>Kindly do not share any critical data, password or PIN.</b>', 'recommended_queries': [u'Types of SBI NRI Accounts', u'Eligibility for NRI account', u'Interest rate for NRI accounts', u'Open an NRI account', u'Remittance for NRIs']}
+2018-02-17 02:52:39,360 my_logger INFO {'is_typable': 'true', 'response': u'Hello, I am SIA - SBI Intelligent Assistant. How may I assist you? I can help you with SBI Bank related queries. Please type your question in the box provided below.\r\n<br><br>\r\n<b>Disclaimer</b>: SIA chatbot is meant only for general information on SBI products and services. <b>Kindly do not share any critical data, password or PIN.</b>', 'recommended_queries': [u'Types of SBI NRI Accounts', u'Eligibility for NRI account', u'Interest rate for NRI accounts', u'Open an NRI account', u'Remittance for NRIs']}
+2018-02-17 03:14:13,914 my_logger ERROR class: GetPcIdAPIView, method: post PcId matching query does not exist.
+2018-02-17 03:49:07,968 my_logger INFO {'is_typable': 'true', 'response': u'Hello, I am SIA - SBI Intelligent Assistant. How may I assist you? I can help you with SBI Bank related queries. Please type your question in the box provided below.\r\n<br><br>\r\n<b>Disclaimer</b>: SIA chatbot is meant only for general information on SBI products and services. <b>Kindly do not share any critical data, password or PIN.</b>', 'recommended_queries': [u'Types of SBI NRI Accounts', u'Eligibility for NRI account', u'Interest rate for NRI accounts', u'Open an NRI account', u'Remittance for NRIs']}
+2018-02-17 03:53:43,833 my_logger INFO {'is_typable': 'true', 'response': u'Hello, I am SIA - SBI Intelligent Assistant. How may I assist you? I can help you with SBI Bank related queries. Please type your question in the box provided below.\r\n<br><br>\r\n<b>Disclaimer</b>: SIA chatbot is meant only for general information on SBI products and services. <b>Kindly do not share any critical data, password or PIN.</b>', 'recommended_queries': [u'Types of SBI NRI Accounts', u'Eligibility for NRI account', u'Interest rate for NRI accounts', u'Open an NRI account', u'Remittance for NRIs']}
+2018-02-17 04:10:27,197 my_logger INFO {'is_typable': 'true', 'response': u'Hello, I am SIA - SBI Intelligent Assistant. How may I assist you? I can help you with SBI Bank related queries. Please type your question in the box provided below.\r\n<br><br>\r\n<b>Disclaimer</b>: SIA chatbot is meant only for general information on SBI products and services. <b>Kindly do not share any critical data, password or PIN.</b>', 'recommended_queries': [u'Types of SBI NRI Accounts', u'Eligibility for NRI account', u'Interest rate for NRI accounts', u'Open an NRI account', u'Remittance for NRIs']}
+2018-02-17 04:10:27,216 my_logger ERROR class: GetPcIdAPIView, method: post PcId matching query does not exist.
+2018-02-17 04:20:42,487 my_logger ERROR class: GetPcIdAPIView, method: post PcId matching query does not exist.
+2018-02-17 04:25:33,496 my_logger ERROR class: GetPcIdAPIView, method: post PcId matching query does not exist.
+2018-02-17 04:36:33,236 my_logger ERROR class: GetPcIdAPIView, method: post PcId matching query does not exist.
+2018-02-17 04:38:57,279 my_logger ERROR class: GetPcIdAPIView, method: post PcId matching query does not exist.
+2018-02-17 04:41:32,738 my_logger INFO {'is_typable': 'true', 'response': u'Hello, I am SIA - SBI Intelligent Assistant. How may I assist you? I can help you with SBI Bank related queries. Please type your question in the box provided below.\r\n<br><br>\r\n<b>Disclaimer</b>: SIA chatbot is meant only for general information on SBI products and services. <b>Kindly do not share any critical data, password or PIN.</b>', 'recommended_queries': [u'Types of SBI NRI Accounts', u'Eligibility for NRI account', u'Interest rate for NRI accounts', u'Open an NRI account', u'Remittance for NRIs']}
+2018-02-17 04:47:17,128 my_logger INFO {'is_typable': 'true', 'response': u'Hello, I am SIA - SBI Intelligent Assistant. How may I assist you? I can help you with SBI Bank related queries. Please type your question in the box provided below.\r\n<br><br>\r\n<b>Disclaimer</b>: SIA chatbot is meant only for general information on SBI products and services. <b>Kindly do not share any critical data, password or PIN.</b>', 'recommended_queries': [u'Types of SBI NRI Accounts', u'Eligibility for NRI account', u'Interest rate for NRI accounts', u'Open an NRI account', u'Remittance for NRIs']}
+2018-02-17 04:51:27,469 my_logger ERROR class: GetPcIdAPIView, method: post PcId matching query does not exist.
+2018-02-17 04:51:31,189 my_logger INFO Entered do_pre_processing
+2018-02-17 04:51:31,189 my_logger INFO AFTER PREPROCESSING: remittance for nris
+2018-02-17 04:51:31,190 my_logger INFO AFTER PREPROCESSING: remittance for nris
+2018-02-17 04:51:31,191 my_logger INFO AFTER PREPROCESSING: remittance for nris 
+2018-02-17 04:51:31,192 my_logger INFO AFTER PREPROCESSING: remittance for nri
+2018-02-17 04:51:31,197 my_logger INFO Intent is : [<Intent: Remittance>, <Intent: Who is NRI?>]
+2018-02-17 04:51:31,197 my_logger INFO Entities is : [<Choices: NRI>]
+2018-02-17 04:51:31,209 my_logger ERROR Error from: recur_entities() 'NoneType' object has no attribute 'entity_choices'
+2018-02-17 04:51:31,222 my_logger INFO Entered process_any_tree_with_stages_new
+2018-02-17 04:51:31,224 my_logger INFO Entered find_last_tree_from_persistent_entities
+2018-02-17 04:51:31,224 my_logger INFO Entered returnNextTree
+2018-02-17 04:51:31,224 my_logger ERROR Error returnNextTree 'NoneType' object has no attribute 'entity_group'
+2018-02-17 04:51:31,229 my_logger INFO Entered create_data_stages
+2018-02-17 04:51:37,543 my_logger INFO {'is_typable': 'true', 'response': u'Hello, I am SIA - SBI Intelligent Assistant. How may I assist you? I can help you with SBI Bank related queries. Please type your question in the box provided below.\r\n<br><br>\r\n<b>Disclaimer</b>: SIA chatbot is meant only for general information on SBI products and services. <b>Kindly do not share any critical data, password or PIN.</b>', 'recommended_queries': [u'Types of SBI NRI Accounts', u'Eligibility for NRI account', u'Interest rate for NRI accounts', u'Open an NRI account', u'Remittance for NRIs']}
+2018-02-17 04:53:56,982 my_logger ERROR class: GetPcIdAPIView, method: post PcId matching query does not exist.
