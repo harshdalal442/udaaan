@@ -54,7 +54,7 @@ function setPcId(pcid){
                 },
                 success: function(data){
 
-                    console.log("SETTED");
+                    //console.log("SETTED");
                 }
         });
     }
@@ -76,7 +76,7 @@ function setUUID(uuid){
                 },
                 success: function(data){
 
-                    console.log("SETTED");
+                    //console.log("SETTED");
 //                    hideAndShowStuff();
 //                    $.ajax({
 //                        url: "/query/",
@@ -113,7 +113,7 @@ $(document).ready(function() {
     var day = dateObj.getUTCDate().toString();
     var year = dateObj.getUTCFullYear().toString();
 
-    console.log(month, day, year);
+    //console.log(month, day, year);
     if(day.length==1){
         day = "0"+day;
     }
@@ -176,7 +176,7 @@ function appendUserChat(sentence){
 }
 
 function enableInput(query){
-    console.log("GOES TO ENABLE", query);
+    //console.log("GOES TO ENABLE", query);
     $("#query").removeAttr('disabled');
     $("#query").css('background-color','white');
     if(!((typeof query === 'undefined') || (query == null))){
@@ -199,7 +199,7 @@ function disableOrEnableInput(is_typable, query){
                 disableInput();
             }
             else if(is_typable == "true"){
-                console.log(query, "Query is");
+                //console.log(query, "Query is");
                 enableInput(query);
             }
         }
@@ -215,7 +215,7 @@ function removePTag(sentence){
 }
 
 function appendSentenceToLeft(sentence, list, flag){
-    console.log(sentence, "AAAAAAAAAA");
+    //console.log(sentence, "AAAAAAAAAA");
     if(!((typeof sentence === 'undefined') || (sentence == null))){
 
         var d = new Date();
@@ -313,7 +313,7 @@ $('#feedback-text').on('input',function(e){
     }
 });
 
-$('body').on('click','#review',function(){
+$('body').on('click','.review',function(){
     $.ajax({
         url: "/chat/get_dictionary",
         type: "POST",
@@ -321,7 +321,7 @@ $('body').on('click','#review',function(){
           "user_id": user_id
         },
         success: function(response) {
-            console.log(response);
+            //console.log(response);
             $("#appendCollapsible").html("");
             for (var key in response) {
                 if (response.hasOwnProperty(key)) {
@@ -337,17 +337,17 @@ $('body').on('click','#review',function(){
                         str += temp_dict["entity_name"];
                         str += ":";
                         str += temp_dict["entity_value"];
-                        str += '<button style="background-color: rgb(255, 255, 255); margin: auto 3px 2px auto; border: 1px solid rgb(30, 136, 229); border-radius: 5px; font-size: 95%; color: rgb(30, 136, 229); text-align: center; cursor: default;margin-left:3%;" class="redirect_tree"';
+                        str += '<button style="cursor:pointer !important;background-color: rgb(255, 255, 255); margin: auto 3px 2px auto; border: 1px solid rgb(30, 136, 229); border-radius: 5px; font-size: 95%; color: rgb(30, 136, 229); text-align: center; cursor: default;margin-left:3%;" class="redirect_tree"';
                         if (temp_dict["redirect_intent"] != null)
                             str += 'redirect_intent="'+temp_dict["redirect_intent"]+'" ';
                         if (temp_dict["entities_to_delete"] != null)
                             str += 'entities_to_delete="'+temp_dict["entities_to_delete"]+'" ';
-                        str += '>Edit</button>';
+                        str += '>Edit<i class="material-icons tiny" style="padding-left:0.2rem">create</i></button>';
                         str += '<br>';
                         str += '</span></blockquote>';
                     }
                     str += '</div></li>';
-                    console.log(str);
+                    //console.log(str);
                     $("#appendCollapsible").append(str);
                 }
             }
@@ -359,7 +359,7 @@ $('body').on('click','#review',function(){
 });
 
 $('body').on('click','.redirect_tree',function(){
-    console.log("CLICKED");
+    //console.log("CLICKED");
     var to_delete_entities = $(this).attr('entities_to_delete');
     var redirect_intent = $(this).attr('redirect_intent');
 
@@ -373,7 +373,7 @@ $('body').on('click','.redirect_tree',function(){
         success: function(response) {
             $('#modal1').modal('close');
 
-            console.log(redirect_intent);
+        //console.log(redirect_intent);
 
             appendUserChat(redirect_intent);
             ajaxCallToIndex(redirect_intent);
@@ -413,18 +413,36 @@ function appendChoices(list){
         $("#show").append('<div class="click-button" style="width:100%;"><div style="margin-left:2% !important;" id="recommendation'+query_cnt+'"></div></div>');
         for(var i=0;i<list.length;i++){
             if(i==0){
-                var str = '<a><div class="btn'+query_cnt+' chip chipbutton button4" style="background-color:#ffffff;margin:auto;border:1px solid #1e88e5;border-radius:5px;font-size:95%;color:#1e88e5;text-align:center;margin-right:3px;margin-bottom:2px;">';
-                str += list[i];
-                //str += '<i class="material-icons" style="background-color:#E12523">chevron_right</i>';
-                str += '</div></a>';
-                $("#recommendation"+query_cnt).append(str);
+                if(list[i]=="Review"){
+                    var str = '<a href="#modal1" class="modal-trigger review"><div class="chip button4" style="background-color:#ffffff;margin:auto;border:1px solid #1e88e5;border-radius:5px;font-size:95%;color:#1e88e5;text-align:center;margin-right:3px;margin-bottom:2px;">';
+                    str += list[i];
+                    //str += '<i class="material-icons" style="background-color:#E12523">chevron_right</i>';
+                    str += '</div></a>';
+                    $("#recommendation"+query_cnt).append(str);
+                }
+                else{
+                    var str = '<a><div class="btn'+query_cnt+' chip chipbutton button4" style="background-color:#ffffff;margin:auto;border:1px solid #1e88e5;border-radius:5px;font-size:95%;color:#1e88e5;text-align:center;margin-right:3px;margin-bottom:2px;">';
+                    str += list[i];
+                    //str += '<i class="material-icons" style="background-color:#E12523">chevron_right</i>';
+                    str += '</div></a>';
+                    $("#recommendation"+query_cnt).append(str);
+                }
             }
             else{
-                var str = '<a><div class="btn'+query_cnt+' chip chipbutton button4" style="background-color:#ffffff;margin:auto;border:1px solid #1e88e5;border-radius:5px;font-size:95%;color:#1e88e5;text-align:center;margin-right:3px;margin-bottom:2px;">';
-                str += list[i];
-                //str += '<i class="material-icons" style="background-color:#E12523">chevron_right</i>';
-                str += '</div></a>';
-                $("#recommendation"+query_cnt).append(str);
+                if(list[i]=="Review"){
+                    var str = '<a href="#modal1" class="modal-trigger review"><div class="chip button4" style="background-color:#ffffff;margin:auto;border:1px solid #1e88e5;border-radius:5px;font-size:95%;color:#1e88e5;text-align:center;margin-right:3px;margin-bottom:2px;">';
+                    str += list[i];
+                    //str += '<i class="material-icons" style="background-color:#E12523">chevron_right</i>';
+                    str += '</div></a>';
+                    $("#recommendation"+query_cnt).append(str);
+                }
+                else{
+                    var str = '<a><div class="btn'+query_cnt+' chip chipbutton button4" style="background-color:#ffffff;margin:auto;border:1px solid #1e88e5;border-radius:5px;font-size:95%;color:#1e88e5;text-align:center;margin-right:3px;margin-bottom:2px;">';
+                    str += list[i];
+                    //str += '<i class="material-icons" style="background-color:#E12523">chevron_right</i>';
+                    str += '</div></a>';
+                    $("#recommendation"+query_cnt).append(str);
+                }
             }
         }
     }
@@ -456,7 +474,7 @@ function appendRecommendations(list){
 
 function appendDataForm(data_form){
     if(!((typeof data_form === 'undefined') || (data_form == null))){
-        console.log("DATAFORM IS:", data_form)
+        //console.log("DATAFORM IS:", data_form)
         $("#query").val(data_form);
     }
 }
@@ -561,14 +579,14 @@ $('body').on('change', '#file_input', function(){
 });
 
 function appendServerChat(data){
-    console.log(data);
+    //console.log(data);
     if(!((typeof data["response"] === 'undefined') || (data["response"] == null)))
         disableOrEnableInput(data["is_typable"], data["response"]);
     else
         disableOrEnableInput(data["is_typable"], "");
     if(!((typeof data["response"] === 'undefined') || (data["response"] == null))){
         list = splitByDollar(data["response"]);
-        console.log(list,"AAAAAAAAAAAAAAAAA");
+        //console.log(list,"AAAAAAAAAAAAAAAAA");
         for(var i=0;i<list.length;i++){
             appendSentenceToLeft(list[i], data["recommended_queries"], false);
         }
@@ -590,30 +608,31 @@ function ajaxCallToIndex(sentence){
             channel: "web",
         },
         success: function(data){
-            console.log(data);
+            //console.log(data);
             var stage = data["current_stage"];
-            console.log(stage, "Stage");
-            console.log(stage.length);
-            if(current_progress != stage && stage.length > 0){
-                var strr = '<a href="#" class="breadcrumb">'+stage+"</a>";
-                current_progress = stage;
-                progress_cnt++;
-                //$("#appendProgress").append(strr);
-                for(var i=1;i<progress_cnt;i++){
-                    $("#a"+i).removeClass("orange");
-                    $("#a"+i).removeClass("red");
-                    $("#a"+i).addClass("green");
+            if(!(typeof stage === 'undefined') || (stage == null)){
+                if(current_progress != stage && stage.length > 0){
+                    var strr = '<a href="#" class="breadcrumb">'+stage+"</a>";
+                    current_progress = stage;
+                    progress_cnt=data_progress[stage];
+                    console.log("Progress count is: ", progress_cnt);
+                    //$("#appendProgress").append(strr);
+                    for(var i=1;i<progress_cnt;i++){
+                        $("#a"+i).removeClass("orange");
+                        $("#a"+i).removeClass("red");
+                        $("#a"+i).addClass("green");
+                    }
+                    $("#a"+progress_cnt).removeClass("orange");
+                    $("#a"+progress_cnt).removeClass("red");
+                    $("#a"+progress_cnt).removeClass("green");
+                    $("#a"+progress_cnt).addClass("orange");
+                    for(var i=progress_cnt+1;i<=6;i++){
+                        $("#a"+i).removeClass("orange");
+                        $("#a"+i).removeClass("green");
+                        $("#a"+i).addClass("red");
+                    }
+                    //$("#a"+progress_cnt).
                 }
-                $("#a"+progress_cnt).removeClass("orange");
-                $("#a"+progress_cnt).removeClass("red");
-                $("#a"+progress_cnt).removeClass("green");
-                $("#a"+progress_cnt).addClass("orange");
-                for(var i=progress_cnt+1;i<=6;i++){
-                    $("#a"+i).removeClass("orange");
-                    $("#a"+i).removeClass("green");
-                    $("#a"+i).addClass("red");
-                }
-                //$("#a"+progress_cnt).
             }
             appendServerChat(data);
             $("#search-box").show();
@@ -633,7 +652,7 @@ function ajaxCallToCancel(){
             user_id: user_id,
         },
         success: function(data){
-            console.log("SUCC");
+            //console.log("SUCC");
             $("#help-div").show();
         }
     });
@@ -655,7 +674,7 @@ $("#submit").click(function(){
     if($('#remove_select').length && $('#query').val().length>0)
         $('#remove_select').remove();
     if(($.trim($('#query').val()) != '') && ($("#query").val()).length<300){
-        console.log("CLICKED");
+        //console.log("CLICKED");
         hideAndShowStuff();
         var sentence = $("#query").val();
         $("#query").val("");
@@ -680,18 +699,18 @@ function removeClickableProperty(ctx){
         if (item.substring(0,4) === 'recc') {
             var value = parseInt(item.substring(4));
             for(var i=1;i<=value;i++){
-                console.log(".recc"+i);
+                //console.log(".recc"+i);
                 $(".recc"+i).removeClass("chipinitial");
                 $(".recc"+i).removeClass("hoverable");
                 $('.recc'+i).css( 'cursor', 'default' );
             }
         }
         if (item.substring(0,3) === 'btn') {
-            console.log(item);
+            //console.log(item);
             var value = parseInt(item.substring(3));
-            console.log(value);
+            //console.log(value);
             for(var i=0;i<=value;i++){
-                console.log(".recc"+i);
+                //console.log(".recc"+i);
                 $(".btn"+i).removeClass("chipbutton");
                 $(".btn"+i).removeClass("hoverable");
                 $('.btn'+i).css( 'cursor', 'default' );
@@ -790,7 +809,7 @@ function startOver(){
                             channel: "web",
                         },
                         success: function(data){
-                            console.log(data,"GGGGGGGGGGGGGGGGGGGGGG");
+                            //console.log(data,"GGGGGGGGGGGGGGGGGGGGGG");
                             $("#help-div").hide();
                             appendServerChat(data);
 
@@ -814,7 +833,7 @@ function cancelButton(){
 $('body').on('click','.chiprecc', function(){
     var id = this.id;
     id = parseInt(id.substring(1));
-    console.log(id);
+    //console.log(id);
     if(id==1)
         startOver();
     else if(id==2)
@@ -827,7 +846,7 @@ $('body').on('click','.chiprecc', function(){
 var settings = {
     continuous:true, // Don't stop never because i have https connection
     onResult:function(text){
-        console.log(text);
+        //console.log(text);
         if(text!="")
             $('#query').val(text);
         else{
@@ -836,7 +855,7 @@ var settings = {
         }
     },
     onStart:function(){
-        console.log("Dictation started by the user");
+        //console.log("Dictation started by the user");
     },
     onEnd:function(){
     }

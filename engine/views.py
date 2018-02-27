@@ -15,7 +15,7 @@ from rest_framework.views import APIView
 import pandas as pd
 import math
 import requests
-
+import locale
 from .serializers import *
 from .utils import *
 
@@ -162,9 +162,9 @@ def create_data_flow(tree, user_id, channel, pipe_temp):
         if tree.question_entity_type.entity_to_delete is not None:
             json["redirect_delete_entities"] = tree.question_entity_type.entity_to_delete.split(",")
         json["response"] = parse_sentence(tree.question_entity_type.question.sentence, tree.question_entity_type.question.file, user_id)
-        if Profile.objects.get(user_id=user_id).re_question:
-            if tree.question_entity_type.re_question.sentence is not None:
-                json["response"] = parse_sentence(tree.question_entity_type.re_question.sentence, tree.question_entity_type.question.file, user_id)
+        #if Profile.objects.get(user_id=user_id).re_question:
+        #    if tree.question_entity_type.re_question.sentence is not None:
+        #        json["response"] = parse_sentence(tree.question_entity_type.re_question.sentence, tree.question_entity_type.question.file, user_id)
         json["choices"] = create_choice_list(tree.question_entity_type.entity_group)
         json["is_answer"] = "false"
         json["pipe"] = pipe_temp
@@ -753,7 +753,9 @@ def parse_super_json(sentence, user_id):
                         multiplier_factor = 20
                 final_sum_assured = int(premium)*multiplier_factor
                 print(final_sum_assured)
-                final_string+=str(final_sum_assured)+" "
+                locale.setlocale(locale.LC_MONETARY, 'en_IN')
+                print("This is something ",locale.currency(final_sum_assured, grouping=True))
+                final_string+=str(locale.currency(final_sum_assured, grouping=True))+" "
             else:
                 final_string+=words+" "
         return final_string
