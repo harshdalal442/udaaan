@@ -55,6 +55,8 @@ def do_pre_processing(message, channel, language):
         logger.error("Error do_pre_processing Error %s", str(e))
 
 def is_data_present(tree, user_id):
+    print("IS Data Present")
+    print("QuestionEntityType: ",tree.question_entity_type.name)
     data = Data.objects.filter(entity_name=tree.question_entity_type.name,
                                user__user_id=user_id)
 
@@ -73,6 +75,7 @@ def returnNextTree(tree, user_id, pipe_temp, stage):
     try:
         logger.info("Entered returnNextTree")
         if tree.question_entity_type.entity_group.is_loop:
+            print("InsideLoop")
             if stage == "pre":
                 return (tree, pipe_temp)
             else:
@@ -107,7 +110,9 @@ def returnNextTree(tree, user_id, pipe_temp, stage):
                 else:
                     return (tree, pipe_temp)
         else:
+            print("Not loop")
             data_present = is_data_present(tree, user_id)
+            print("data present", data_present)
             print(data_present)
             if data_present[0]:
                 count = provide_mapper_count(tree)
@@ -286,11 +291,8 @@ def validate_data_and_save_from_response(message, tree, user_id):
                     redirect_entities_delete = tree.question_entity_type.entity_to_delete
 
                 try:
-                    print(tree.question_entity_type.name)
                     a = Data.objects.get(entity_name=tree.question_entity_type.name,
                                             user=user_t)
-                    print("inside saving")
-                    print(a, a.cnt)
                     cntt = a.cnt
                     a.cnt = a.cnt + 1
                     a.save()
@@ -302,7 +304,6 @@ def validate_data_and_save_from_response(message, tree, user_id):
                          redirect_entities_delete=redirect_entities_delete,
                          user=user_t).save()
                 except:
-                    print("inside saving not found")
                     Data(entity_name=tree.question_entity_type.name,
                          entity_value=d['f'](message),
                          current_stage=tree.current_stage,
@@ -339,11 +340,8 @@ def validate_choice_and_save_from_response(tree, entities, user_id):
                         redirect_entities_delete = tree.question_entity_type.entity_to_delete
 
                     try:
-                        print(tree.question_entity_type.name)
                         a = Data.objects.get(entity_name=tree.question_entity_type.name,
                                              user=Profile.objects.get(user_id=user_id))
-                        print("inside saving")
-                        print(a, a.cnt)
                         cntt = a.cnt
                         a.cnt = a.cnt + 1
                         a.save()
@@ -563,17 +561,12 @@ def parse_json(current_answer, file, user_id):
                 else:
                     string += words + " "
 
-            print("inside parse_json")
-            print(list, "1")
-            print(list_to_find, "2")
-            print("DF ", df)
             for stuff in list:
                 str1 = str(stuff[0])
                 str2 = str(stuff[1])
                 df[str1] = df[str1].astype(str)
                 df[str1] = df[str1].str.lower()
                 df = df.loc[df[str1] == str2.lower()]
-            print("DF ", df)
             dict_temp = {}
             if(len(list_to_find)>0):
                 for stuff in list_to_find:
@@ -584,7 +577,6 @@ def parse_json(current_answer, file, user_id):
                             dict_temp[stuff] = int(df.iloc[0][stuff])
                     else:
                         dict_temp[stuff] = df.iloc[0][stuff]
-            print(dict_temp)
             return (string, dict_temp)
         except:
             message = "Sorry the corresponding entry is not present in the database."
@@ -597,9 +589,7 @@ def replace_values(sentence, dict_temp):
     sentence = sentence.replace("</p>", "")
     sentence = sentence.replace("&nbsp;", " ")
     string = ""
-    print("In replace")
     for words in sentence.split():
-        print("w ", words)
         if words in dict_temp:
             string += str(dict_temp[words]) + " "
         else:
@@ -776,14 +766,11 @@ def parse_store_in_models(current_answer, file, user_id):
     try:
         if (file!="999abc999" and file is not None):
             try:
-                print("inside parse_store_in_models")
                 current_answer = current_answer.replace("<p>","")
                 current_answer = current_answer.replace("</p>", "")
                 current_answer = current_answer.replace("&nbsp;", " ")
-                print("inside parse_store_in_models")
                 file = Files.objects.get(file_name=file)
                 df = pd.read_csv(file.file)
-                print(df, "DF")
                 string = ""
                 flag_start = False
                 word = ""
@@ -793,7 +780,6 @@ def parse_store_in_models(current_answer, file, user_id):
                 list_to_find = []
                 flag_start_2 = False
                 for words in current_answer.split():
-                    print(words)
                     if words == ")}}":
                         flag_start_2 = False
                     elif flag_start_2 == True:
@@ -827,8 +813,6 @@ def parse_store_in_models(current_answer, file, user_id):
                     else:
                         string += words + " "
 
-                print(list, "first")
-                print(list_to_find, "second")
                 for stuff in list:
                     str1 = str(stuff[0])
                     str2 = str(stuff[1])
@@ -840,8 +824,6 @@ def parse_store_in_models(current_answer, file, user_id):
                     for stuff in list_to_find:
                         stuff_to_store = df.iloc[0][stuff[0]]
                         stuff_where_to_store = stuff[1]
-                        print("stuff to store: ", stuff_to_store)
-                        print("stuff where to store: ", stuff_where_to_store)
                         Data(entity_name=stuff_where_to_store,
                              entity_value=stuff_to_store,
                              current_stage="Advisor Confidential Report",
@@ -1621,13 +1603,11 @@ class GetDictionaryAPIView(APIView):
         datas = Data.objects.filter(user__user_id=user_id)
         json = {}
 
-        print("Data are: ", datas)
         for data in datas:
             current_stage = data.current_stage
             current_entity_name = data.entity_name
             current_entity_value = data.entity_value
 
-            print("Current stage is : ", current_stage, len(current_stage))
             redirect_intent = None
             if data.redirect_intent is not None:
                 redirect_intent = data.redirect_intent
@@ -1663,7 +1643,6 @@ class DeleteEntitiesAPIView(APIView):
         to_delete_entities = data.get('to_delete_entities').split(",")
         user_id = data.get('user_id')
 
-        print(to_delete_entities, user_id)
         for entity in to_delete_entities:
             Data.objects.filter(entity_name=entity,
                                 user__user_id=user_id).delete()

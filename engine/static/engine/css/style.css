@@ -142,6 +142,12 @@ a{
     overflow-x: hidden;
 }
 
+#show1{
+    overflow-y: scroll;
+    height:80%;
+    overflow-x: hidden;
+}
+
 @media only screen and (max-width: 600px)  {
     .container{
         width: 80%;
@@ -150,7 +156,7 @@ a{
     #show{
         height: 30rem;
     }
-    .modal { width: 95% !important ; height: 90% !important ; }
+    .modal { width: 85% !important ; height: 60% !important ; }
 }
 
 .hovera{

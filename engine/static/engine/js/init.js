@@ -4,7 +4,16 @@ var like_cnt = 2;
 var query_cnt = 0;
 var first_time = 1;
 var recc_cnt = 0;
-
+var current_progress = "";
+var progress_cnt = 0;
+var data_progress={
+    "Advisor Confidential Report":"1",
+    "Premium & Sum Assured Calculation":"2",
+    "Client Credentials":"3",
+    "Client Education and Occupation":"4",
+    "Client - Health Questionnaire":"5",
+    "Bank details":"6",
+}
 
 var scroll_to_bottom = function() {
   //$("#show").animate({ scrollTop: $('#show').prop("scrollHeight")}, 1000);
@@ -322,19 +331,20 @@ $('body').on('click','#review',function(){
                     var list = response[key];
                     str += '<div class="collapsible-body">';
                     for(var i=0;i<list.length;i++){
+                        str += '<blockquote style="border-left: 5px solid #0089ec;">'
                         str += '<span>';
                         temp_dict = list[i];
                         str += temp_dict["entity_name"];
                         str += ":";
                         str += temp_dict["entity_value"];
-                        str += '<button class="redirect_tree"';
+                        str += '<button style="background-color: rgb(255, 255, 255); margin: auto 3px 2px auto; border: 1px solid rgb(30, 136, 229); border-radius: 5px; font-size: 95%; color: rgb(30, 136, 229); text-align: center; cursor: default;margin-left:3%;" class="redirect_tree"';
                         if (temp_dict["redirect_intent"] != null)
                             str += 'redirect_intent="'+temp_dict["redirect_intent"]+'" ';
                         if (temp_dict["entities_to_delete"] != null)
                             str += 'entities_to_delete="'+temp_dict["entities_to_delete"]+'" ';
                         str += '>Edit</button>';
                         str += '<br>';
-                        str += '</span>';
+                        str += '</span></blockquote>';
                     }
                     str += '</div></li>';
                     console.log(str);
@@ -581,6 +591,30 @@ function ajaxCallToIndex(sentence){
         },
         success: function(data){
             console.log(data);
+            var stage = data["current_stage"];
+            console.log(stage, "Stage");
+            console.log(stage.length);
+            if(current_progress != stage && stage.length > 0){
+                var strr = '<a href="#" class="breadcrumb">'+stage+"</a>";
+                current_progress = stage;
+                progress_cnt++;
+                //$("#appendProgress").append(strr);
+                for(var i=1;i<progress_cnt;i++){
+                    $("#a"+i).removeClass("orange");
+                    $("#a"+i).removeClass("red");
+                    $("#a"+i).addClass("green");
+                }
+                $("#a"+progress_cnt).removeClass("orange");
+                $("#a"+progress_cnt).removeClass("red");
+                $("#a"+progress_cnt).removeClass("green");
+                $("#a"+progress_cnt).addClass("orange");
+                for(var i=progress_cnt+1;i<=6;i++){
+                    $("#a"+i).removeClass("orange");
+                    $("#a"+i).removeClass("green");
+                    $("#a"+i).addClass("red");
+                }
+                //$("#a"+progress_cnt).
+            }
             appendServerChat(data);
             $("#search-box").show();
             $("#search-load").hide();

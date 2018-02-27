@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'ckeditor',
     'rest_framework',
     'import_export',
-    'sslserver',
-    'corsheaders',
 ]
 
 CKEDITOR_CONFIGS = {
