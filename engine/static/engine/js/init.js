@@ -6,6 +6,7 @@ var first_time = 1;
 var recc_cnt = 0;
 var current_progress = "";
 var progress_cnt = 0;
+var is_toast = 0;
 var data_progress={
     "Advisor Confidential Report":"1",
     "Premium & Sum Assured Calculation":"2",
@@ -14,6 +15,28 @@ var data_progress={
     "Client - Health Questionnaire":"5",
     "Bank details":"6",
 }
+
+var data_autocomplete = {
+"Life Insurance Corporation of India": null,
+"Aegon Life Insurance Company" : null,
+"Aviva India" : null,
+"Bajaj Allianz Life Insurance" : null,
+"Birla Sun Life Insurance Company Limited" : null,
+"Edelweiss Tokio Life Insurance" : null,
+"Exide Life Insurance" : null,
+"Sahara India Pariwar" : null,
+"SBI Life Insurance Company" : null,
+"TATA AIG" : null
+}
+
+var data_lol = {
+}
+$(document).ready(function () {
+    $('input.autocomplete').autocomplete({
+            data: data_lol,
+            limit: 3
+    });
+});
 
 var scroll_to_bottom = function() {
   //$("#show").animate({ scrollTop: $('#show').prop("scrollHeight")}, 1000);
@@ -334,8 +357,10 @@ $('body').on('click','.review',function(){
                         str += '<blockquote style="border-left: 5px solid #0089ec;">'
                         str += '<span>';
                         temp_dict = list[i];
+                        str += '<b>';
                         str += temp_dict["entity_name"];
-                        str += ":";
+                        str += '</b>';
+                        str += " : ";
                         str += temp_dict["entity_value"];
                         str += '<button style="cursor:pointer !important;background-color: rgb(255, 255, 255); margin: auto 3px 2px auto; border: 1px solid rgb(30, 136, 229); border-radius: 5px; font-size: 95%; color: rgb(30, 136, 229); text-align: center; cursor: default;margin-left:3%;" class="redirect_tree"';
                         if (temp_dict["redirect_intent"] != null)
@@ -485,7 +510,9 @@ $('body').on('change', '.datepicker', function(){
 
      $('#query').val($('#date').val());
 
-     $('#query').focus();
+     if(!( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )) {
+        $('#query').focus();
+     }
 
 })
 
@@ -522,7 +549,9 @@ $('body').on('change', '.dropdown_select', function(){
       return;
     }
     $('#query').val ( ($(this).val()));
+    if(!( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )) {
     $('#query').focus();
+    }
 });
 
 function appendDropdown(list){
@@ -575,7 +604,9 @@ function appendFile(){
 
 $('body').on('change', '#file_input', function(){
     $('#query').val($('#file_input').val().substr(12));
+    if(!( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )) {
     $('#query').focus();
+    }
 });
 
 function appendServerChat(data){
@@ -610,6 +641,24 @@ function ajaxCallToIndex(sentence){
         success: function(data){
             //console.log(data);
             var stage = data["current_stage"];
+            if(data["is_toast"] == true){
+                is_toast = 1;
+            }
+            if(!(typeof data["show_options"] === 'undefined') || (data["show_options"] == null)){
+                 //console.log(data["show_options"]);
+                 if(data["show_options"] == true){
+                     console.log("goes in if");
+                     $('input.autocomplete').autocomplete({
+                        data: data_autocomplete
+                     });
+                 }
+                 else{
+                     console.log("goes in else");
+                     $('input.autocomplete').autocomplete({
+                        data: data_lol
+                     });
+                 }
+            }
             if(!(typeof stage === 'undefined') || (stage == null)){
                 if(current_progress != stage && stage.length > 0){
                     var strr = '<a href="#" class="breadcrumb">'+stage+"</a>";
@@ -618,18 +667,20 @@ function ajaxCallToIndex(sentence){
                     console.log("Progress count is: ", progress_cnt);
                     //$("#appendProgress").append(strr);
                     for(var i=1;i<progress_cnt;i++){
-                        $("#a"+i).removeClass("orange");
-                        $("#a"+i).removeClass("red");
-                        $("#a"+i).addClass("green");
+                        $("#a"+i).removeClass("orange darken-4");
+                        $("#a"+i).removeClass("red lighten-4");
+                        $("#a"+i).removeClass("light-green lighten-2");
+                        $("#a"+i).addClass("light-green lighten-2");
                     }
-                    $("#a"+progress_cnt).removeClass("orange");
-                    $("#a"+progress_cnt).removeClass("red");
-                    $("#a"+progress_cnt).removeClass("green");
-                    $("#a"+progress_cnt).addClass("orange");
+                    $("#a"+progress_cnt).removeClass("orange darken-4");
+                    $("#a"+progress_cnt).removeClass("red lighten-4");
+                    $("#a"+progress_cnt).removeClass("light-green lighten-2");
+                    $("#a"+progress_cnt).addClass("orange darken-4");
                     for(var i=progress_cnt+1;i<=6;i++){
-                        $("#a"+i).removeClass("orange");
-                        $("#a"+i).removeClass("green");
-                        $("#a"+i).addClass("red");
+                        $("#a"+i).removeClass("orange darken-4");
+                        $("#a"+i).removeClass("light-green lighten-2");
+                        $("#a"+progress_cnt).removeClass("red lighten-4");
+                        $("#a"+i).addClass("red lighten-4");
                     }
                     //$("#a"+progress_cnt).
                 }
@@ -638,7 +689,9 @@ function ajaxCallToIndex(sentence){
             $("#search-box").show();
             $("#search-load").hide();
             scroll_to_bottom();
+            if(!( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )) {
             $("#query").focus();
+            }
             query_cnt++;
         }
     });
@@ -679,6 +732,9 @@ $("#submit").click(function(){
         var sentence = $("#query").val();
         $("#query").val("");
         appendUserChat(sentence);
+        if(is_toast == 1){
+            is_toast = 0;
+        }
         ajaxCallToIndex(sentence);
     }
     else{
@@ -814,7 +870,9 @@ function startOver(){
                             appendServerChat(data);
 
                             scroll_to_bottom();
+                            if(!( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )) {
                             $("#query").focus();
+                            }
                             query_cnt++;
                         }
                     });
@@ -887,4 +945,96 @@ $('#query').on('input',function(e){
         $("#submit").show();
         $("#mic").hide();
     }
+
+    if(is_toast == 1){
+        var value = $("#query").val();
+        if(value.length >= 6){
+            Materialize.toast(number2text(value), 2000);
+        }
+    }
 });
+
+function number2text(value) {
+    var fraction = Math.round(frac(value)*100);
+    var f_text  = "";
+
+    if(fraction > 0) {
+        f_text = "And "+convert_number(fraction)+" Paise";
+    }
+
+    return convert_number(value)+" Rupees "+f_text+" Only";
+}
+
+function frac(f) {
+    return f % 1;
+}
+
+function convert_number(number)
+{
+    if ((number < 0) || (number > 999999999))
+    {
+        return "NUMBER OUT OF RANGE!";
+    }
+    var Gn = Math.floor(number / 10000000);  /* Crore */
+    number -= Gn * 10000000;
+    var kn = Math.floor(number / 100000);     /* lakhs */
+    number -= kn * 100000;
+    var Hn = Math.floor(number / 1000);      /* thousand */
+    number -= Hn * 1000;
+    var Dn = Math.floor(number / 100);       /* Tens (deca) */
+    number = number % 100;               /* Ones */
+    var tn= Math.floor(number / 10);
+    var one=Math.floor(number % 10);
+    var res = "";
+
+    if (Gn>0)
+    {
+        res += (convert_number(Gn) + " Crore");
+    }
+    if (kn>0)
+    {
+            res += (((res=="") ? "" : " ") +
+            convert_number(kn) + " Lakh");
+    }
+    if (Hn>0)
+    {
+        res += (((res=="") ? "" : " ") +
+            convert_number(Hn) + " Thousand");
+    }
+
+    if (Dn)
+    {
+        res += (((res=="") ? "" : " ") +
+            convert_number(Dn) + " Hundered");
+    }
+
+
+    var ones = Array("", "One", "Two", "Three", "Four", "Five", "Six","Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen","Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen","Nineteen");
+    var tens = Array("", "", "Twenty", "Thirty", "Fourty", "Fifty","Sixty","Seventy", "Eighty", "Ninety");
+    if (tn>0 || one>0)
+    {
+        if (!(res==""))
+        {
+            res += " And ";
+        }
+        if (tn < 2)
+        {
+            res += ones[tn * 10 + one];
+        }
+        else
+        {
+
+            res += tens[tn];
+            if (one>0)
+            {
+                res += ("-" + ones[one]);
+            }
+        }
+    }
+
+    if (res=="")
+    {
+        res = "zero";
+    }
+    return res;
+}

@@ -155,6 +155,10 @@ def create_data_flow(tree, user_id, channel, pipe_temp):
             json["is_dropdown"] = True
         if tree.question_entity_type.entity_group.is_file:
             json["is_file"] = True
+        if tree.question_entity_type.entity_group.show_options:
+            json["show_options"] = True
+        if tree.question_entity_type.entity_group.is_toast:
+            json["is_toast"] = True
         if tree.current_stage is not None:
             json["current_stage"] = tree.current_stage
         if tree.question_entity_type.intent_on_click is not None:
@@ -828,7 +832,7 @@ def parse_store_in_models(current_answer, file, user_id):
                         stuff_where_to_store = stuff[1]
                         Data(entity_name=stuff_where_to_store,
                              entity_value=stuff_to_store,
-                             current_stage="Advisor Confidential Report",
+                             current_stage="",
                              user=Profile.objects.get(user_id=user_id)).save()
                 return (string)
             except:

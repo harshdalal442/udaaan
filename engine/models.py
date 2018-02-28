@@ -414,7 +414,8 @@ class EntityGroup(models.Model):
     is_primary = models.BooleanField(default=False)
     is_persistent = models.BooleanField(default=False)
     is_loop = models.BooleanField(default=False)
-
+    show_options = models.BooleanField(default=False)
+    is_toast = models.BooleanField(default=False)
     is_date = models.BooleanField(default=False)
     is_dropdown = models.BooleanField(default=False)
     is_file = models.BooleanField(default=False)
