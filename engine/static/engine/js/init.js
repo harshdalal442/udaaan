@@ -15,6 +15,7 @@ var data_progress={
     "Client - Health Questionnaire":"5",
     "Bank details":"6",
 }
+var data_list = ["Advisor Confidential Report","Premium & Sum Assured Calculation","Client Credentials","Client Education and Occupation","Client - Health Questionnaire","Bank details"];
 
 var data_autocomplete = {
 "Life Insurance Corporation of India": null,
@@ -99,26 +100,26 @@ function setUUID(uuid){
                 },
                 success: function(data){
 
-                    //console.log("SETTED");
-//                    hideAndShowStuff();
-//                    $.ajax({
-//                        url: "/query/",
-//                        type: "POST",
-//                        data: {
-//                            message: "pos",
-//                            user_id: user_id,
-//                            channel: "web",
-//                        },
-//                        success: function(data){
-//                            console.log(data);
-//                            appendServerChat(data);
-//                            $("#search-box").show();
-//                            $("#search-load").hide();
-//                            scroll_to_bottom();
-//                            $("#query").focus();
-//                            query_cnt++;
-//                        }
-//                    });
+                    console.log("SETTED");
+                    hideAndShowStuff();
+                    $.ajax({
+                        url: "/chat/query/",
+                        type: "POST",
+                        data: {
+                            message: "aa",
+                            user_id: user_id,
+                            channel: "web",
+                        },
+                        success: function(data){
+                            console.log(data);
+                            appendServerChat(data);
+                            $("#search-box").show();
+                            $("#search-load").hide();
+                            scroll_to_bottom();
+                            $("#query").focus();
+                            query_cnt++;
+                        }
+                    });
                 }
         });
     }
@@ -344,14 +345,13 @@ $('body').on('click','.review',function(){
           "user_id": user_id
         },
         success: function(response) {
-            //console.log(response);
             $("#appendCollapsible").html("");
-            for (var key in response) {
-                if (response.hasOwnProperty(key)) {
+            for(var key in data_list){
+                if (response.hasOwnProperty(data_list[key])) {
                     var str = '<li>';
-                    var data = key;
+                    var data = data_list[key];
                     str += '<div class="collapsible-header">'+data+'</div>';
-                    var list = response[key];
+                    var list = response[data_list[key]];
                     str += '<div class="collapsible-body">';
                     for(var i=0;i<list.length;i++){
                         str += '<blockquote style="border-left: 5px solid #0089ec;">'
@@ -641,7 +641,9 @@ function ajaxCallToIndex(sentence){
         success: function(data){
             //console.log(data);
             var stage = data["current_stage"];
+            console.log(data);
             if(data["is_toast"] == true){
+                console.log("This is a toast ;)");
                 is_toast = 1;
             }
             if(!(typeof data["show_options"] === 'undefined') || (data["show_options"] == null)){

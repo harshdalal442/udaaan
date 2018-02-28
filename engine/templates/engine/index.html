@@ -5,13 +5,13 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link rel="stylesheet" href="{% static 'engine/css/materialize.css' %}">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="{% static 'engine/css/easy-autocomplete.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{% static 'engine/css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>EasyForm</title>
-  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src="{% static 'engine/js/jquery.js' %}"></script>
 </head>
 <body>
   <div id="feedback-modal" class="modal modal-fixed-footer">
@@ -120,12 +120,12 @@
       </div>
       <div class="col s10 l7" id="search-box" style="bottom: 0;position:fixed;">
         <form method="POST" action="#">{% csrf_token %}
-          <div class="col s10 l11 input-field">
-            <input placeholder="Type your query here" id="query" type="text" class="validate autocomplete" autocomplete="off">
+          <div class="col s10 l11">
+            <input placeholder="Type your query here" id="query" type="text" class="validate autocomplete" autocomplete="off" style="width:85%;position:absolute;bottom:10px;margin:0px;">
           </div>
           <div class="col s2 l1">
               <br>
-              <a class="btn-floating " id="submit" style="display:none;background-color:#0094E0"><i class="material-icons">send</i></a>
+              <a class="btn-floating " id="submit" style="display:none;background-color:#0094E0;position:absolute;bottom:10px;"><i class="material-icons">send</i></a>
               <a id="mic" class="btn-floating " style="background-color:#0094E0" onclick="startRecognition();"><i class="material-icons">mic</i></a>&nbsp;
             <!-- <a class="waves-effect waves-light btn blue darken-3" id="submit" style="display:none;margin-bottom:5%;background-color:#00897B">Submit</a>-->
           </div>
@@ -138,7 +138,7 @@
 <!--  Scripts-->
 
 <script src="{% static 'engine/js/materialize.js' %}"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script src="{% static 'engine/js/cookie.js' %}"></script>
 <script src="{% static 'engine/js/jquery.easy-autocomplete.js' %}"></script>
   <script type="text/javascript" src="{% static 'engine/js/artyom.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'engine/js/browser.js' %}"></script>
