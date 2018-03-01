@@ -651,13 +651,21 @@ function ajaxCallToIndex(sentence){
                  if(data["show_options"] == true){
                      console.log("goes in if");
                      $('input.autocomplete').autocomplete({
-                        data: data_autocomplete
+                        data: data_autocomplete,
+                        limit: 3,
+                        onAutocomplete: function(val) {
+                            $("#submit").click();
+                        },
                      });
                  }
                  else{
                      console.log("goes in else");
                      $('input.autocomplete').autocomplete({
-                        data: data_lol
+                        data: data_lol,
+                        limit: 3,
+                        onAutocomplete: function(val) {
+                            $("#submit").click();
+                        },
                      });
                  }
             }

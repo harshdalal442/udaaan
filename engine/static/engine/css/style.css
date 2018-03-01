@@ -148,6 +148,9 @@ a{
     overflow-x: hidden;
 }
 
+.autocomplete-content{
+    margin-bottom: 80px;
+}
 @media only screen and (max-width: 600px)  {
     .container{
         width: 80%;
