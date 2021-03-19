@@ -5,7 +5,7 @@ Django==1.11.10
 django-ckeditor==5.4.0
 django-import-export==0.7.0
 django-js-asset==1.0.0
-djangorestframework==3.7.7
+djangorestframework==3.11.2
 editdistance==0.4
 et-xmlfile==1.0.1
 gunicorn==19.6.0
